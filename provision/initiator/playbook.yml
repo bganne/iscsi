@@ -1,0 +1,16 @@
+---
+- hosts: all
+  sudo: true
+  tasks:
+    - name: install iscsi initiator packages
+      yum: pkg=iscsi-initiator-utils state=latest
+    - name: install scsi packages
+      yum: pkg=sg3_utils state=latest
+    - name: create iscsi dir
+      file: path=/etc/iscsi state=directory
+    - name: set initiator iqn
+      copy: src={{ playbook_dir }}/initiatorname.iscsi dest=/etc/iscsi/initiatorname.iscsi
+                owner=root group=root mode=0600
+    - name: set iscsi conf
+      copy: src={{ playbook_dir }}/iscsid.conf dest=/etc/iscsi/iscsid.conf
+                owner=root group=root mode=0600

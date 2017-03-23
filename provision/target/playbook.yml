@@ -1,0 +1,11 @@
+---
+- hosts: all
+  sudo: true
+  tasks:
+    - name: install iscsi target packages
+      yum: pkg=targetcli state=latest
+    - name: copy iscsi target conf
+      copy: src={{ playbook_dir }}/saveconfig.json dest=/etc/target/saveconfig.json
+                owner=root group=root mode=0600
+    - name: ensure the service is running
+      service: name=target enabled=yes state=restarted 

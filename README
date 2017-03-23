@@ -1,0 +1,8 @@
+Environment to experiment with iSCSI
+This creates 2 CentOS VM, 1 iSCSI target and 1 iSCSI initiator.
+
+Quickstart:
+[user@host ~]$ sudo yum install -y vagrant ansible
+[user@host ~]$ vagrant up
+[user@host ~]$ vagrant ssh initiator
+[vagrant@iscsi-initiator ~]$ sudo sg_inq /dev/sdb
